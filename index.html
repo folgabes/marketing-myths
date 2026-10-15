@@ -171,6 +171,11 @@ mark{background:var(--accent-soft);color:inherit;padding:0 2px;border-radius:3px
   .prose h2{font-size:21px}
   .credit{margin-top:40px;padding:15px 16px}
 }
+@media (max-width:540px){
+  /* на узком экране поиск уходит на свою строку, иначе поле сжимается до двух букв */
+  .bar{flex-wrap:wrap;row-gap:8px}
+  .search-wrap{order:3;flex:1 0 100%;max-width:none}
+}
 </style>
 
 <div class="shell">
