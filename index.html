@@ -1,0 +1,561 @@
+<title>Мифы маркетинга</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: fixed left index + single reading column, sticky utility bar with search and the traffic-light ledger */
+:root{
+  --bg:#f4f6f5; --surface:#ffffff; --surface-2:#eceff0;
+  --fg:#17201f; --muted:#5a6a6c; --line:#d8e0df;
+  --accent:#0e5f63; --accent-soft:#d9eceb;
+  --good:#1a7a4c; --warn:#9a6508; --bad:#ac2a20; --unknown:#4f6a7d;
+  --font-display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --font-body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#101615; --surface:#171f1f; --surface-2:#1e2827;
+    --fg:#e6ecea; --muted:#99a8a8; --line:#283434;
+    --accent:#5fd0cb; --accent-soft:#1b3433;
+    --good:#4fc08a; --warn:#dca53f; --bad:#ef8a7e; --unknown:#8fa8bb;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#101615; --surface:#171f1f; --surface-2:#1e2827;
+  --fg:#e6ecea; --muted:#99a8a8; --line:#283434;
+  --accent:#5fd0cb; --accent-soft:#1b3433;
+  --good:#4fc08a; --warn:#dca53f; --bad:#ef8a7e; --unknown:#8fa8bb;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:17px;line-height:1.6;margin:0}
+h1,h2,h3,h4{font-family:var(--font-display);line-height:1.2;text-wrap:balance;font-weight:600}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:2px}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---- shell ---- */
+.shell{display:grid;grid-template-columns:276px minmax(0,1fr);min-height:100%}
+.side{border-right:1px solid var(--line);background:var(--surface);padding:0 0 48px}
+.side-inner{position:sticky;top:env(safe-area-inset-top,0px);max-height:100vh;overflow-y:auto;padding:22px 18px 32px}
+.brand{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.01em;margin:0 0 2px}
+.brand-sub{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);margin:0 0 20px}
+.nav-group{margin-bottom:18px}
+.nav-label{font-family:var(--font-mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);padding:0 8px;margin-bottom:6px}
+.nav-item{display:block;width:100%;text-align:left;background:none;border:0;border-radius:7px;padding:7px 9px;cursor:pointer;font-family:var(--font-display);font-size:14.5px;line-height:1.3;color:var(--fg)}
+.nav-item:hover{background:var(--surface-2)}
+.nav-item[aria-current="true"]{background:var(--accent-soft);color:var(--accent)}
+.nav-item .num{font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-right:7px}
+.nav-item[aria-current="true"] .num{color:var(--accent)}
+
+/* ---- top bar ---- */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;gap:10px;align-items:center;
+  padding:12px 28px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.menu-btn{display:none}
+.search-wrap{position:relative;flex:1;min-width:0;max-width:430px}
+.search-wrap svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);opacity:.55}
+#q{width:100%;padding:9px 12px 9px 32px;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--fg);font-family:var(--font-display);font-size:14px}
+#q::placeholder{color:var(--muted)}
+.bar-btn{border:1px solid var(--line);background:var(--surface);border-radius:9px;padding:8px 12px;cursor:pointer;font-family:var(--font-display);font-size:13.5px;white-space:nowrap}
+.bar-btn:hover{border-color:var(--accent);color:var(--accent)}
+.bar-btn[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.spacer{flex:1}
+
+/* ---- main ---- */
+main{padding:0 28px 96px}
+.col{max-width:70ch;margin:0 auto}
+.wide{max-width:94ch}
+.status{font-family:var(--font-mono);font-size:12px;color:var(--muted);padding:14px 0}
+
+/* ---- home ---- */
+.hero{padding:40px 0 10px}
+.hero h1{font-size:clamp(30px,5vw,44px);margin:0 0 12px;letter-spacing:-.02em}
+.hero p{font-size:18.5px;color:var(--muted);margin:0 0 6px}
+.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:26px 0 8px;padding:0;list-style:none}
+.legend li{border:1px solid var(--line);border-radius:10px;padding:11px 13px;background:var(--surface)}
+.legend b{display:block;font-family:var(--font-display);font-size:14px;margin-bottom:2px}
+.legend span{font-size:13.5px;color:var(--muted);line-height:1.45}
+.legend .n{font-family:var(--font-mono);font-size:11.5px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:12px;margin:14px 0 0;padding:0;list-style:none}
+.card{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:0}
+.card button{display:block;width:100%;text-align:left;background:none;border:0;padding:15px 16px;cursor:pointer;border-radius:12px}
+.card button:hover{background:var(--surface-2)}
+.card .k{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;color:var(--muted)}
+.card .t{font-family:var(--font-display);font-size:16px;font-weight:600;margin:5px 0 4px}
+.card .d{font-size:14px;color:var(--muted);line-height:1.45}
+.note{border-left:3px solid var(--accent);background:var(--surface);padding:12px 15px;border-radius:0 9px 9px 0;font-size:15px;margin:26px 0}
+.note b{font-family:var(--font-display)}
+.disclaimer{font-size:14px;color:var(--muted);border-top:1px solid var(--line);margin-top:34px;padding-top:14px}
+.credit{max-width:70ch;margin:56px auto 0;padding:18px 20px;border:1px solid var(--line);border-left:4px solid var(--accent);
+  border-radius:0 12px 12px 0;background:var(--surface);color:var(--muted);font-size:14.5px}
+.credit p{margin:0 0 9px;line-height:1.5}
+.credit p:last-child{margin:0}
+.credit b{font-family:var(--font-display);color:var(--fg)}
+.credit .report{display:inline-block;margin-top:4px;padding:8px 15px;border:1px solid var(--accent);border-radius:9px;
+  font-family:var(--font-display);font-size:14px;text-decoration:none;color:var(--accent)}
+.credit .report:hover{background:var(--accent-soft)}
+h2.sec{font-size:13px;font-family:var(--font-mono);font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:34px 0 10px}
+
+/* ---- ledger (traffic light) ---- */
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 16px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 13px;cursor:pointer;font-family:var(--font-display);font-size:13.5px}
+.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.chips-doc{margin-top:-6px}
+.chips-doc .chip{font-size:12.5px;padding:5px 11px;color:var(--muted)}
+.chips-doc .chip[aria-pressed="true"]{color:var(--bg)}
+.doc-filter{margin:16px 0 2px}
+.rows{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.row{border:1px solid var(--line);border-left-width:4px;border-radius:0 10px 10px 0;background:var(--surface)}
+.row button{display:block;width:100%;text-align:left;background:none;border:0;padding:11px 14px;cursor:pointer}
+.row button:hover{background:var(--surface-2)}
+.row .txt{font-size:15px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.row .meta{font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-top:6px}
+.row.good{border-left-color:var(--good)} .row.warn{border-left-color:var(--warn)}
+.row.bad{border-left-color:var(--bad)} .row.unknown{border-left-color:var(--unknown)}
+.row.mixed{border-left-color:var(--accent)}
+mark{background:var(--accent-soft);color:inherit;padding:0 2px;border-radius:3px}
+
+/* ---- prose ---- */
+.prose h1{font-size:clamp(26px,4vw,36px);letter-spacing:-.02em;margin:34px 0 18px}
+.prose h2{font-size:23px;margin:40px 0 10px;padding-top:14px;border-top:1px solid var(--line)}
+.prose h3{font-size:18px;margin:26px 0 8px}
+.prose h4{font-size:15.5px;margin:20px 0 6px;font-family:var(--font-mono);font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.prose p,.prose li{font-size:17px}
+.prose ul,.prose ol{padding-left:22px}
+.prose li{margin:4px 0}
+.prose blockquote{margin:18px 0;padding:12px 16px;border-left:3px solid var(--warn);background:var(--surface);border-radius:0 9px 9px 0}
+.prose blockquote p{margin:0;font-size:16px}
+.prose code{font-family:var(--font-mono);font-size:.86em;background:var(--surface-2);padding:1px 5px;border-radius:5px}
+.prose hr{border:0;border-top:1px solid var(--line);margin:30px 0}
+.prose a[data-doc]{cursor:pointer}
+.table-scroll{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.prose table{border-collapse:collapse;width:100%;font-family:var(--font-display);font-size:14.5px}
+.prose th,.prose td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.prose th{font-weight:600;background:var(--surface-2);white-space:nowrap}
+.prose tr:last-child td{border-bottom:0}
+.prose p.verdict{border-left:3px solid var(--accent);padding:8px 0 8px 13px;margin:16px 0}
+.prose p.verdict.good{border-left-color:var(--good)} .prose p.verdict.warn{border-left-color:var(--warn)}
+.prose p.verdict.bad{border-left-color:var(--bad)} .prose p.verdict.unknown{border-left-color:var(--unknown)}
+.prose :target,.flash{animation:flash 1.6s ease-out}
+@keyframes flash{from{background:var(--accent-soft)}to{background:transparent}}
+.doc-head{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;padding:22px 0 0}
+.doc-head .k{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.07em;color:var(--muted)}
+.toc{border:1px solid var(--line);border-radius:11px;background:var(--surface);padding:12px 15px;margin:18px 0 6px}
+.toc summary{font-family:var(--font-display);font-size:14px;cursor:pointer;font-weight:600}
+.toc ol{margin:10px 0 2px;padding-left:20px;columns:2;column-gap:22px}
+.toc li{font-size:14px;margin:3px 0;break-inside:avoid}
+.toc a{cursor:pointer}
+.correction{border:1px solid var(--warn);border-left-width:4px;border-radius:0 10px 10px 0;background:var(--surface);padding:12px 15px;margin:18px 0;font-size:15px}
+.correction b{font-family:var(--font-display)}
+.correction ul{margin:7px 0 0;padding-left:20px}
+.correction li{font-size:14.5px}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:880px){
+  .shell{grid-template-columns:minmax(0,1fr)}
+  .side{position:fixed;inset:0 auto 0 0;width:286px;z-index:40;transform:translateX(-100%);transition:transform .22s ease;border-right:1px solid var(--line)}
+  .side.open{transform:none}
+  .side-inner{max-height:100vh}
+  .scrim{position:fixed;inset:0;background:#0008;z-index:35}
+  .menu-btn{display:inline-flex}
+  .bar{padding:10px 16px}
+  main{padding:0 16px 80px}
+  .toc ol{columns:1}
+}
+</style>
+
+<div class="shell">
+  <aside class="side" id="side">
+    <div class="side-inner">
+      <p class="brand">Мифы маркетинга</p>
+      <p class="brand-sub">что работает · что переплата · чего не знают</p>
+      <nav id="nav"></nav>
+    </div>
+  </aside>
+
+  <div>
+    <div class="bar">
+      <button class="bar-btn menu-btn" id="menu" aria-label="Разделы">☰</button>
+      <div class="search-wrap">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.3-4.3"/></svg>
+        <input id="q" type="search" placeholder="Поиск по всем файлам" autocomplete="off" spellcheck="false">
+      </div>
+      <button class="bar-btn" id="ledger-btn" aria-pressed="false">Светофор</button>
+      <div class="spacer"></div>
+      <button class="bar-btn" id="theme" aria-label="Сменить тему">◐</button>
+    </div>
+    <main id="main">
+      <div class="col" id="view"></div>
+      <footer class="credit">
+        <p><b>Версия 1, октябрь 2026.</b> Этот обзор собран с помощью ИИ (Claude) по открытым источникам.
+        Проверка выборочная: часть цифр и названий исследований сверена с первоисточниками, часть — нет.
+        Что именно проверялось и что было исправлено, видно в разделе «Журнал исправлений и карта ⚪️».</p>
+        <p>Ошибки здесь вероятны. Если нашли неточность, устаревшие данные или пропущенную тему — напишите,
+        это попадёт в следующую версию. Особенно полезна ссылка на первоисточник.</p>
+        <p><a class="report" href="https://github.com/folgabes/marketing-myths/issues/new" target="_blank" rel="noopener">Сообщить об ошибке</a></p>
+        <p>Это обзор доказательств, а не медицинские назначения. Решения о лечении — с вашим врачом.</p>
+      </footer>
+    </main>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+<script>
+const DOCS = [
+  {id:"01", path:"content/01-method.md", src:"01-РАМКИ-И-МЕТОД.md", title:"Рамки и метод", group:"Основа",
+   desc:"14 механик, которыми продают мифы, и как читать исследования. Каркас для всего остального."},
+  {id:"12", path:"content/12-money.md", src:"12-ИТОГИ-И-ДЕНЬГИ.md", title:"Итоги и деньги", group:"Основа",
+   desc:"Топ-16 «купить», топ-20 «не покупать», суммы, ответы на конкретные вопросы, карта ⚪️."},
+  {id:"30", path:"content/30-actions.md", src:"30-ЧТО-ВЫКИНУТЬ-И-ПРОВЕРИТЬ.md", title:"Что выкинуть и проверить", group:"Основа",
+   desc:"Практика: выкинуть сегодня, перестать покупать, что измерить (CO, радон, CO₂, влажность, вода), газ, опасные смеси."},
+  {id:"02", path:"content/02-food.md", src:"02-ЕДА.md", title:"Еда и напитки", group:"Разделы",
+   desc:"Сахар и подсластители, кола, кофе, молоко, глютен, ГМО, мясо, жиры, алкоголь, вода, посуда, ксилит, рис и мышьяк."},
+  {id:"03", path:"content/03-supplements.md", src:"03-БАДЫ.md", title:"Витамины и БАДы", group:"Разделы",
+   desc:"Мультивитамины, D, омега-3, магний, железо и ферритин, коллаген, мелатонин, креатин, NMN, коллоидное серебро."},
+  {id:"04", path:"content/04-cosmetics.md", src:"04-КОСМЕТИКА.md", title:"Косметика и уход", group:"Разделы",
+   desc:"SPF и тропики, парабены, антиэйдж, волосы, зубы, инъекции, целлюлит, репелленты от комаров."},
+  {id:"05", path:"content/05-home.md", src:"05-БЫТОВАЯ-ХИМИЯ-И-ДОМ.md", title:"Бытовая химия и дом", group:"Разделы",
+   desc:"Эко-порошки, спреи и лёгкие, очистители воздуха, радон, газ, пластик и BPA, микропластик, PFAS, CO₂, плесень."},
+  {id:"06", path:"content/06-clothing.md", src:"06-ОДЕЖДА.md", title:"Одежда и текстиль", group:"Разделы",
+   desc:"Синтетика, бамбук, красители, обувь, стельки и ортезы, бюстгальтер, компрессия, меринос."},
+  {id:"07", path:"content/07-sport.md", src:"07-СПОРТ.md", title:"Спорт и движение", group:"Разделы",
+   desc:"Растяжка, крепатура, жиросжигающая зона, 10 000 шагов, трекеры, бег и колени, ледяные ванны, EMS."},
+  {id:"08", path:"content/08-medicine.md", src:"08-МЕДИЦИНА.md", title:"Медицина и диагностика", group:"Разделы",
+   desc:"Массаж, тейпы, чек-апы по возрастам, гипердиагностика, несуществующие диагнозы, спина, сон, зрение, ГЗТ, дети, слух."},
+  {id:"09", path:"content/09-eco.md", src:"09-ЭКО.md", title:"Эко и устойчивость", group:"Разделы",
+   desc:"Углеродный след, шоперы, переработка пластика, zero waste, greenwashing, эко-значки."},
+  {id:"10", path:"content/10-gadgets.md", src:"10-ГАДЖЕТЫ-БИОХАКИНГ.md", title:"Гаджеты и биохакинг", group:"Разделы",
+   desc:"Умные часы, CGM у здоровых, протокол Брайана Джонсона, биологический возраст, красный свет, подписки."},
+  {id:"11", path:"content/11-nicotine.md", src:"11-НИКОТИН.md", title:"Табак и никотин", group:"Разделы",
+   desc:"Вейпы, IQOS, подушечки, кальян, что помогает бросить."},
+  {id:"34", path:"content/34-corrections.md", src:"34-ЖУРНАЛ-ИСПРАВЛЕНИЙ-И-КАРТА-БЕЛЫХ-ПЯТЕН.md", title:"Журнал исправлений и карта ⚪️", group:"Контроль",
+   desc:"Что исправлено после проверки достоверности и почему. Плюс карта мест, где доказательств нет: ~50 тем в пяти типах «данных нет»."},
+  {id:"00", path:"content/00-topics.md", src:"00-ТЕМЫ.md", title:"Исходная карта тем", group:"Служебное",
+   desc:"Черновой список тем со сквозной нумерацией, с которого начиналось исследование. Нумерация местами расходится с файлами."}
+];
+
+const MARKS = [
+  {ch:"🟢", key:"good", name:"Работает", desc:"Есть приличные доказательства пользы, эффект заметный"},
+  {ch:"🟡", key:"warn", name:"Переплата", desc:"Не вредно, но работает не лучше дешёвой альтернативы"},
+  {ch:"🔴", key:"bad",  name:"Не работает", desc:"Доказано, что эффекта нет, или доказан вред"},
+  {ch:"⚪️", key:"unknown", name:"Данных нет", desc:"Ни доказательств пользы, ни доказательств безопасности"}
+];
+const MARK_RE = /🟢|🟡|🔴|⚪️|⚪/g;
+
+const store = {};            // id -> {raw, lines, headings:[], ledger:[]}
+let loaded = 0, ready = false;
+let view = {kind:"home"};
+let ledgerFilter = "all";    // метка в «Светофоре»
+let ledgerDoc = "all";       // раздел в «Светофоре»
+let docFilter = "all";       // метка внутри открытой темы
+const $ = s => document.querySelector(s);
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ---------- navigation ---------- */
+function buildNav(){
+  const groups = [...new Set(DOCS.map(d => d.group))];
+  $("#nav").innerHTML = groups.map(g => `
+    <div class="nav-group">
+      <div class="nav-label">${g}</div>
+      ${DOCS.filter(d => d.group === g).map(d =>
+        `<button class="nav-item" data-doc="${d.id}"><span class="num">${d.id}</span>${esc(d.title)}</button>`).join("")}
+    </div>`).join("");
+  $("#nav").insertAdjacentHTML("afterbegin",
+    `<div class="nav-group"><button class="nav-item" data-home="1"><span class="num">00</span>Обзор</button></div>`);
+}
+function markNav(){
+  document.querySelectorAll(".nav-item").forEach(b =>
+    b.setAttribute("aria-current", String(view.kind === "doc" && b.dataset.doc === view.id)));
+}
+
+/* ---------- loading ---------- */
+async function loadAll(){
+  await Promise.all(DOCS.map(async d => {
+    try{
+      const r = await fetch(d.path);
+      const raw = await r.text();
+      store[d.id] = index(d, raw);
+    }catch(e){ store[d.id] = index(d, "_Не удалось загрузить этот файл._"); }
+    loaded++;
+    if(view.kind === "home") renderHome();
+  }));
+  ready = true;
+  if(view.kind === "home") renderHome();
+  else if(view.kind === "doc") renderDoc(view.id, view.anchor);
+}
+
+function index(d, raw){
+  const lines = raw.split("\n");
+  const headings = [], ledger = [];
+  let cur = d.title, inTable = false;
+  lines.forEach(line => {
+    const h = line.match(/^(#{1,3})\s+(.*)$/);
+    if(h){ cur = h[2].replace(/\*\*/g, "").trim(); headings.push({level:h[1].length, text:cur}); inTable = false; return; }
+    if(/^\|/.test(line)) inTable = true;
+    const found = line.match(MARK_RE);
+    if(!found) return;
+    const uniq = [...new Set(found.map(m => m === "⚪" ? "⚪️" : m))];
+    const text = line
+      .replace(/^[|>\-*\s]+/, "").replace(/\|/g, " · ")
+      .replace(/\*\*/g, "").replace(/`/g, "").trim();
+    if(text.replace(MARK_RE, "").trim().length < 12) return;
+    ledger.push({doc:d.id, heading:cur, text, marks:uniq, table:inTable});
+  });
+  return {raw, lines, headings, ledger};
+}
+
+/* ---------- home ---------- */
+function renderHome(){
+  view = {kind:"home"};
+  $("#view").className = "col";
+  const all = Object.values(store).flatMap(s => s.ledger);
+  const counts = {};
+  MARKS.forEach(m => counts[m.ch] = all.filter(r => r.marks.includes(m.ch)).length);
+  const groups = [...new Set(DOCS.map(d => d.group))];
+  $("#view").innerHTML = `
+    <div class="hero">
+      <h1>Что работает, что переплата, а чего мы просто не знаем</h1>
+      <p>Обзор доказательств по быту: еда, БАДы, косметика, бытовая химия, одежда, спорт, медицина, экология, гаджеты. Каждая тема — вердикт, размер эффекта и цена вопроса.</p>
+    </div>
+    <ul class="legend">
+      ${MARKS.map(m => `<li><b>${m.ch} ${m.name}</b><span>${m.desc}</span>
+        <div class="n">${ready ? counts[m.ch] + " утверждений" : "считаю…"}</div></li>`).join("")}
+    </ul>
+    <p class="status">${ready
+      ? `Загружено ${DOCS.length} файлов. Поиск работает по всему тексту; «Светофор» собирает все помеченные утверждения в один список.`
+      : `Загружаю файлы: ${loaded} из ${DOCS.length}…`}</p>
+    <div class="note">
+      <b>С чего начать.</b> Если времени мало — <a data-goto="30">Что выкинуть и проверить</a>: там действия, а не обоснования.
+      Если интересен метод — <a data-goto="01">Рамки и метод</a>: 14 приёмов, которыми продают мифы.
+      Где доказательств нет и что уже исправлено после проверки — <a data-goto="34">Журнал исправлений и карта ⚪️</a>.
+    </div>
+    ${groups.map(g => `
+      <h2 class="sec">${g}</h2>
+      <ul class="cards">${DOCS.filter(d => d.group === g).map(d => `
+        <li class="card"><button data-doc="${d.id}">
+          <div class="k">${d.id}</div><div class="t">${esc(d.title)}</div><div class="d">${esc(d.desc)}</div>
+        </button></li>`).join("")}</ul>`).join("")}
+    <p class="disclaimer">Это обзор доказательств, а не медицинские назначения. Решения о лечении — с вашим врачом.
+    Цифры и выводы верны на момент сбора; часть тем активно меняется.</p>`;
+  markNav();
+  scrollTop();
+}
+
+/* ---------- document ---------- */
+function renderDoc(id, anchor){
+  const d = DOCS.find(x => x.id === id); if(!d) return;
+  view = {kind:"doc", id, anchor};
+  const s = store[id];
+  $("#view").className = "col";
+  if(!s){ $("#view").innerHTML = `<p class="status">Загружаю «${esc(d.title)}»…</p>`; markNav(); return; }
+
+  const marksBar = `
+    <div class="chips doc-filter">
+      <button class="chip" data-df="all" aria-pressed="${docFilter === "all"}">Весь текст</button>
+      ${MARKS.map(m => {
+        const n = s.ledger.filter(r => r.marks.includes(m.ch)).length;
+        return n ? `<button class="chip" data-df="${m.ch}" aria-pressed="${docFilter === m.ch}">${m.ch} ${m.name} · ${n}</button>` : "";
+      }).join("")}
+    </div>`;
+
+  if(docFilter !== "all"){
+    const rows = s.ledger.filter(r => r.marks.includes(docFilter));
+    const mk = MARKS.find(m => m.ch === docFilter);
+    $("#view").className = "col wide";
+    $("#view").innerHTML = `
+      <div class="doc-head"><span class="k">Файл ${d.id} · ${esc(d.title)}</span></div>
+      <div class="hero" style="padding:14px 0 4px">
+        <h1>${mk.ch} ${mk.name} — ${esc(d.title)}</h1>
+        <p>${rows.length} ${plural(rows.length, "утверждение", "утверждения", "утверждений")} с этой меткой. Нажмите строку, чтобы открыть её в тексте с обоснованием.</p>
+      </div>
+      ${marksBar}
+      <ul class="rows">${rows.map(r => rowHTML(r, null, true)).join("")}</ul>`;
+    markNav();
+    scrollTop();
+    return;
+  }
+
+  const html = marked.parse(s.raw, {gfm:true, headerIds:false, mangle:false});
+  $("#view").innerHTML = `
+    <div class="doc-head"><span class="k">Файл ${d.id} · ${d.group}</span></div>
+    ${id === "00" ? `<div class="correction"><b>Это черновик, а не результат</b>
+      <p style="margin:6px 0 0">Исходный план исследования. Нумерация тем местами расходится с итоговыми файлами — выводы смотрите в тематических разделах.</p></div>` : ""}
+    ${marksBar}
+    <details class="toc"><summary>Содержание</summary><ol id="toc-list"></ol></details>
+    <article class="prose" id="prose">${html}</article>`;
+
+  const prose = $("#prose");
+
+  // tables get their own scroll container
+  prose.querySelectorAll("table").forEach(t => {
+    const w = document.createElement("div"); w.className = "table-scroll";
+    t.parentNode.insertBefore(w, t); w.appendChild(t);
+  });
+
+  // anchors on headings + table of contents
+  const hs = [...prose.querySelectorAll("h1,h2,h3")];
+  hs.forEach((h, i) => h.id = "h" + i);
+  $("#toc-list").innerHTML = hs.filter(h => h.tagName === "H2")
+    .map(h => `<li><a data-jump="${h.id}">${esc(h.textContent)}</a></li>`).join("");
+
+  // verdict rails
+  prose.querySelectorAll("p,li").forEach(el => {
+    const found = (el.textContent.match(MARK_RE) || []).map(m => m === "⚪" ? "⚪️" : m);
+    if(!found.length || el.tagName === "LI") return;
+    const uniq = [...new Set(found)];
+    const key = uniq.length === 1 ? MARKS.find(m => m.ch === uniq[0]).key : "mixed";
+    el.classList.add("verdict", key);
+  });
+
+  // in-report links between markdown files
+  prose.querySelectorAll("a[href]").forEach(a => {
+    const href = decodeURIComponent(a.getAttribute("href"));
+    const hit = DOCS.find(x => href.includes(x.src));
+    if(hit){ a.dataset.goto = hit.id; a.removeAttribute("href"); }
+    else if(/^https?:/.test(href)){ a.target = "_blank"; a.rel = "noopener"; }
+    else if(href.endsWith(".md")) a.removeAttribute("href"); // файл не входит в сайт
+  });
+
+  markNav();
+  if(anchor != null){
+    const h = hs.find(x => norm(x.textContent).includes(norm(anchor)));
+    if(h){ h.scrollIntoView({block:"start", behavior:"instant"}); h.classList.add("flash"); window.scrollBy(0, -70); return; }
+  }
+  scrollTop();
+}
+const norm = s => s.replace(/\s+/g, " ").replace(/[*`#]/g, "").trim().toLowerCase().slice(0, 60);
+
+/* ---------- ledger ---------- */
+function renderLedger(){
+  view = {kind:"ledger"};
+  $("#view").className = "col wide";
+  const all = Object.values(store).flatMap(s => s.ledger);
+  const byMark = ledgerFilter === "all" ? all : all.filter(r => r.marks.includes(ledgerFilter));
+  const rows = ledgerDoc === "all" ? byMark : byMark.filter(r => r.doc === ledgerDoc);
+  const mk = MARKS.find(m => m.ch === ledgerFilter);
+  const dc = DOCS.find(d => d.id === ledgerDoc);
+  const title = ledgerFilter === "all" && ledgerDoc === "all"
+    ? "Светофор"
+    : `${mk ? mk.ch + " " + mk.name : "Все метки"}${dc ? " — " + dc.title : ""}`;
+  $("#view").innerHTML = `
+    <div class="hero" style="padding:28px 0 4px">
+      <h1>${esc(title)}</h1>
+      <p>${rows.length} ${plural(rows.length, "утверждение", "утверждения", "утверждений")} из ${ledgerDoc === "all" ? "всех разделов" : "одного раздела"}. Нажмите строку, чтобы открыть её в тексте с обоснованием.</p>
+    </div>
+    <div class="chips">
+      <button class="chip" data-f="all" aria-pressed="${ledgerFilter === "all"}">Все метки · ${(ledgerDoc === "all" ? all : all.filter(r => r.doc === ledgerDoc)).length}</button>
+      ${MARKS.map(m => {
+        const pool = ledgerDoc === "all" ? all : all.filter(r => r.doc === ledgerDoc);
+        return `<button class="chip" data-f="${m.ch}" aria-pressed="${ledgerFilter === m.ch}">${m.ch} ${m.name} · ${pool.filter(r => r.marks.includes(m.ch)).length}</button>`;
+      }).join("")}
+    </div>
+    <div class="chips chips-doc">
+      <button class="chip" data-fd="all" aria-pressed="${ledgerDoc === "all"}">Все разделы · ${byMark.length}</button>
+      ${DOCS.map(d => {
+        const n = byMark.filter(r => r.doc === d.id).length;
+        return n ? `<button class="chip" data-fd="${d.id}" aria-pressed="${ledgerDoc === d.id}">${esc(d.title)} · ${n}</button>` : "";
+      }).join("")}
+    </div>
+    ${ready ? "" : `<p class="status">Файлы ещё загружаются: ${loaded} из ${DOCS.length}…</p>`}
+    <ul class="rows">${rows.map(r => rowHTML(r, null, ledgerDoc !== "all")).join("")
+      || `<li class="status">С этим сочетанием меток и разделов ничего нет.</li>`}</ul>`;
+  markNav();
+  scrollTop();
+}
+function rowHTML(r, highlight, hideDoc){
+  const key = r.marks.length === 1 ? MARKS.find(m => m.ch === r.marks[0]).key : "mixed";
+  const doc = DOCS.find(d => d.id === r.doc);
+  let txt = esc(r.text);
+  if(highlight) txt = txt.replace(new RegExp("(" + highlight.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "gi"), "<mark>$1</mark>");
+  const meta = hideDoc ? esc(r.heading) : `${esc(r.heading)} — ${esc(doc ? doc.title : "")}`;
+  return `<li class="row ${key}"><button data-doc="${r.doc}" data-anchor="${esc(r.heading)}">
+    <div class="txt">${txt}</div>
+    <div class="meta">${meta}</div></button></li>`;
+}
+
+/* ---------- search ---------- */
+function renderSearch(term){
+  view = {kind:"search", term};
+  $("#view").className = "col wide";
+  const q = term.toLowerCase();
+  const hits = [];
+  DOCS.forEach(d => {
+    const s = store[d.id]; if(!s) return;
+    let cur = d.title;
+    s.lines.forEach(line => {
+      const h = line.match(/^(#{1,3})\s+(.*)$/);
+      if(h){ cur = h[2].replace(/\*\*/g, "").trim(); return; }
+      if(line.toLowerCase().includes(q) && line.trim().length > 12){
+        hits.push({doc:d.id, heading:cur, text:line.replace(/^[|>\-*\s]+/, "").replace(/\|/g, " · ").replace(/\*\*/g, "").trim(),
+                   marks:[...new Set((line.match(MARK_RE) || []).map(m => m === "⚪" ? "⚪️" : m))]});
+      }
+    });
+  });
+  const shown = hits.slice(0, 80);
+  $("#view").innerHTML = `
+    <div class="hero" style="padding:28px 0 4px">
+      <h1>${hits.length} ${plural(hits.length, "совпадение", "совпадения", "совпадений")}</h1>
+      <p>По запросу «${esc(term)}»${hits.length > shown.length ? `, показаны первые ${shown.length}` : ""}. ${ready ? "" : "Файлы ещё загружаются."}</p>
+    </div>
+    <ul class="rows">${shown.map(r => rowHTML(r, term)).join("") || `<li class="status">Ничего не нашлось. Попробуйте короче: «радон», «ферритин», «SPF».</li>`}</ul>`;
+  markNav();
+  scrollTop();
+}
+const plural = (n, a, b, c) => {
+  const m = n % 100, k = n % 10;
+  return m > 10 && m < 20 ? c : k === 1 ? a : k > 1 && k < 5 ? b : c;
+};
+
+/* ---------- events ---------- */
+function scrollTop(){ window.scrollTo({top:0, behavior:"instant"}); }
+function closeSide(){ $("#side").classList.remove("open"); document.querySelector(".scrim")?.remove(); }
+
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-doc],[data-home],[data-goto],[data-jump],[data-f],[data-fd],[data-df]");
+  if(!t) return;
+  if(t.dataset.jump){ const el = document.getElementById(t.dataset.jump); el?.scrollIntoView({block:"start"}); el?.classList.add("flash"); return; }
+  if(t.dataset.f){ ledgerFilter = t.dataset.f; renderLedger(); return; }
+  if(t.dataset.fd){ ledgerDoc = t.dataset.fd; renderLedger(); return; }
+  if(t.dataset.df){ docFilter = t.dataset.df; renderDoc(view.id); return; }
+  const id = t.dataset.doc || t.dataset.goto;
+  if(t.dataset.home){ $("#q").value = ""; setPressed(false); docFilter = "all"; renderHome(); closeSide(); return; }
+  if(id){ $("#q").value = ""; setPressed(false); docFilter = "all"; renderDoc(id, t.dataset.anchor); closeSide(); }
+});
+function setPressed(on){ $("#ledger-btn").setAttribute("aria-pressed", String(on)); }
+
+let timer;
+$("#q").addEventListener("input", e => {
+  const v = e.target.value.trim();
+  clearTimeout(timer);
+  timer = setTimeout(() => {
+    setPressed(false);
+    if(v.length < 2){ if(view.kind === "search") renderHome(); return; }
+    renderSearch(v);
+  }, 180);
+});
+$("#ledger-btn").addEventListener("click", () => {
+  const on = $("#ledger-btn").getAttribute("aria-pressed") !== "true";
+  setPressed(on);
+  if(on){ $("#q").value = ""; renderLedger(); } else renderHome();
+});
+$("#menu").addEventListener("click", () => {
+  const s = $("#side");
+  if(s.classList.contains("open")) return closeSide();
+  s.classList.add("open");
+  const sc = document.createElement("div"); sc.className = "scrim";
+  sc.addEventListener("click", closeSide);
+  document.body.appendChild(sc);
+});
+$("#theme").addEventListener("click", () => {
+  const dark = matchMedia("(prefers-color-scheme: dark)").matches;
+  const cur = document.documentElement.getAttribute("data-theme") || (dark ? "dark" : "light");
+  const next = cur === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try{ localStorage.setItem("theme", next); }catch(e){}
+});
+try{ const saved = localStorage.getItem("theme"); if(saved) document.documentElement.setAttribute("data-theme", saved); }catch(e){}
+
+buildNav();
+renderHome();
+loadAll();
+</script>
