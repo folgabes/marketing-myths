@@ -1,3 +1,6 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Мифы маркетинга</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
@@ -158,9 +161,15 @@ mark{background:var(--accent-soft);color:inherit;padding:0 2px;border-radius:3px
   .side-inner{max-height:100vh}
   .scrim{position:fixed;inset:0;background:#0008;z-index:35}
   .menu-btn{display:inline-flex}
-  .bar{padding:10px 16px}
+  .bar{padding:10px 16px;gap:7px}
   main{padding:0 16px 80px}
   .toc ol{columns:1}
+  #q{font-size:16px}                 /* 16px — иначе iOS зумит страницу при фокусе */
+  .bar-btn{padding:8px 11px;font-size:13px}
+  .hero{padding:26px 0 6px}
+  .prose p,.prose li{font-size:16.5px}
+  .prose h2{font-size:21px}
+  .credit{margin-top:40px;padding:15px 16px}
 }
 </style>
 
@@ -228,7 +237,7 @@ const DOCS = [
    desc:"Умные часы, CGM у здоровых, протокол Брайана Джонсона, биологический возраст, красный свет, подписки."},
   {id:"11", path:"content/11-nicotine.md", src:"11-НИКОТИН.md", title:"Табак и никотин", group:"Разделы",
    desc:"Вейпы, IQOS, подушечки, кальян, что помогает бросить."},
-  {id:"34", path:"content/34-corrections.md", src:"34-ЖУРНАЛ-ИСПРАВЛЕНИЙ-И-КАРТА-БЕЛЫХ-ПЯТЕН.md", title:"Журнал исправлений и карта ⚪️", group:"Контроль",
+  {id:"34", path:"content/34-corrections.md", src:"34-ЖУРНАЛ-ИСПРАВЛЕНИЙ-И-КАРТА-БЕЛЫХ-ПЯТЕН.md", title:"Журнал исправлений", group:"Контроль",
    desc:"Что исправлено после проверки достоверности и почему. Плюс карта мест, где доказательств нет: ~50 тем в пяти типах «данных нет»."},
   {id:"00", path:"content/00-topics.md", src:"00-ТЕМЫ.md", title:"Исходная карта тем", group:"Служебное",
    desc:"Черновой список тем со сквозной нумерацией, с которого начиналось исследование. Нумерация местами расходится с файлами."}
